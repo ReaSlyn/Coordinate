@@ -1,0 +1,169 @@
+.background {
+  background-color: #815ac4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background-color: white;
+  width: 420px;
+  height: 560px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.logo::before {
+  content: "";
+  position: absolute;
+  margin-left: 28px;
+  width: 2px;
+  height: 16px;
+  background-color: black;
+}
+
+.logo img {
+  height: 16px;
+}
+
+.coordinate {
+  margin-left: 24px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  margin-bottom: 30px;
+}
+
+.link {
+  width: 132px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--grey);
+  border-bottom: var(--grey) solid 2px;
+  font-family: var(--regular);
+  font-size: 16px;
+}
+
+#active {
+  color: var(--purple);
+  border-bottom: var(--purple) solid 2px;
+  font-family: var(--bold);
+}
+
+.form {
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.input label {
+  font-family: var(--medium);
+  font-size: 16px;
+}
+
+.input label::after {
+  content: "*";
+  color: var(--purple);
+}
+
+.input input[type="email"],
+.input input[type="password"] {
+  height: 28px;
+  padding-left: 16px;
+  border-radius: 25px;
+  border: var(--grey) solid 2px;
+  font-family: var(--regular);
+}
+
+.input input[type="email"]:focus,
+.input input[type="password"]:focus {
+  outline: none;
+  border: var(--purple) solid 2px;
+}
+
+.cardBody input[type="submit"] {
+  margin-top: 4px;
+  width: 100%;
+  height: 32px;
+  border-radius: 25px;
+  background-color: var(--purple);
+  border: none;
+  color: white;
+  font-family: var(--medium);
+  font-size: 18px;
+}
+
+.cardBody input[type="submit"]:active {
+  animation: darkerInOut 0.2s ease-in-out;
+}
+
+@keyframes darkerInOut {
+  0% {
+    background-color: var(--purple);
+    color: white;
+  }
+  50% {
+    background-color: #3e2569;
+    color: var(--grey);
+  }
+  100% {
+    background-color: var(--purple);
+    color: white;
+  }
+}
+
+.other {
+  margin-top: 117px;
+  color: var(--grey);
+  font-family: var(--regular);
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.other::after,
+.other::before {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--grey);
+  margin: 0 8px;
+}
+
+.cardBody button[type="button"] {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

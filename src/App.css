@@ -1,1 +1,69 @@
+:root {
+  --purple: #815ac4;
+  --grey: #bfbfbf;
+  --thin: "Neue Haas Grotesk Display Pro Thin";
+  --regular: "Neue Haas Grotesk Display Pro Regular";
+  --medium: "Neue Haas Grotesk Display Pro Medium";
+  --bold: "Neue Haas Grotesk Display Pro Bold";
+}
 
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro Thin";
+  src: url("./fonts/NeueHaasDisplayThin.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro Regular";
+  src: url("./fonts/NeueHaasDisplayRoman.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro Medium";
+  src: url("./fonts/NeueHaasDisplayMedium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro Bold";
+  src: url("./fonts/NeueHaasDisplayBold.ttf") format("truetype");
+}
+
+/* CSS RESET */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.active > div {
+  color: white;
+  background-color: var(--purple);
+}

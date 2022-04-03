@@ -1,7 +1,0 @@
-const [data, setData] = useState({});
-
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}`)
-      .then((innerData) => innerData.json())
-      .then((innerData) => setData(innerData));
-  });
