@@ -1,0 +1,56 @@
+.navbar {
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  top: 0;
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 70px;
+}
+
+.logo {
+  position: relative;
+}
+
+.logo::before {
+  content: "";
+  position: absolute;
+  margin-left: 40px;
+  width: 2px;
+  height: 24px;
+  background-color: black;
+}
+
+.logo > img {
+  height: 24px;
+}
+
+.coordinate {
+  margin-left: 36px;
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.button {
+  color: white;
+  background-color: var(--purple);
+  padding: 6.5px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: var(--medium);
+}
+
+.profilePicture {
+  border-radius: 50%;
+  width: 32px;
+}

@@ -1,0 +1,97 @@
+.feed {
+  margin: 40px 70px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.row .link {
+  font-size: 16px;
+  font-family: var(--thin);
+}
+
+.title {
+  font-size: 24px;
+  font-family: var(--bold);
+  color: var(--purple);
+}
+
+.feed > div {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.monthly {
+  display: flex;
+  flex-direction: row;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.project img {
+  aspect-ratio: 1.78 / 1;
+}
+
+.projectInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectInfo {
+  font-size: 16px;
+  font-family: var(--regular);
+}
+
+.spaceBetween {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.spaceBetween > p {
+  font-size: 20px;
+  font-family: var(--bold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.impression {
+  display: flex;
+  flex-direction: row;
+  column-gap: 12px;
+}
+
+.iconText {
+  display: flex;
+  flex-direction: row;
+  column-gap: 4px;
+}
+
+.iconText img {
+  height: 10px;
+}
+
+.iconText p {
+  font-size: 12px;
+  font-family: var(--regular);
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
