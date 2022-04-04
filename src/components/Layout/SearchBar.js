@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate, Link, NavLink} from "react-router-dom";
+import React from "react";
+import {useNavigate} from "react-router-dom";
 import styles from "./SearchBar.module.css";
+import Filter from "./Filter";
 import search from "../../images/search.svg";
 import close from "../../images/close.svg";
 
@@ -53,40 +54,16 @@ function SearchBar(props) {
             }}
           />
         </div>
-        <div className={styles.filter}>
-          <NavLink
-            to={`feed/${searchTerm ? searchTerm : ""}`}
-            onClick={() => setFilter("")}
-          >
-            <div className={styles.button}>
-              <p>tout</p>
-            </div>
-          </NavLink>
-          <NavLink
-            to={`feed/design/${searchTerm ? searchTerm : ""}`}
-            onClick={() => setFilter(`design`)}
-          >
-            <div className={styles.button}>
-              <p>design</p>
-            </div>
-          </NavLink>
-          <NavLink
-            to={`feed/development/${searchTerm ? searchTerm : ""}`}
-            onClick={() => setFilter(`development`)}
-          >
-            <div className={styles.button}>
-              <p>développement</p>
-            </div>
-          </NavLink>
-          <NavLink
-            to={`feed/project-manager/${searchTerm ? searchTerm : ""}`}
-            onClick={() => setFilter(`project-manager`)}
-          >
-            <div className={styles.button}>
-              <p>chef de projet</p>
-            </div>
-          </NavLink>
-        </div>
+        <Filter
+          searchTerm={searchTerm}
+          setFilter={setFilter}
+          path="/feed"
+          componentStyles={{
+            borderRadius: "0 25px 25px 0",
+            padding: "0 20px 0 6px",
+            borderLeft: "none",
+          }}
+        />
       </form>
     </header>
   );

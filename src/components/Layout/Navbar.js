@@ -10,7 +10,7 @@ function Navbar(props) {
     <nav className={styles.navbar}>
       <ul>
         <li>
-          <Link to="/">
+          <Link to="/feed">
             <div className={styles.logo}>
               <img src={hetic} alt="Logo hetic" />
               <img
@@ -22,16 +22,19 @@ function Navbar(props) {
           </Link>
         </li>
         <li className={styles.right}>
-          <Link to="/new-project">
-            <div className={styles.button}>
-              <p>validation des projets</p>
-            </div>
-          </Link>
-          <Link to="/project-validation">
-            <div className={styles.button}>
-              <p>nouveau projet</p>
-            </div>
-          </Link>
+          {(props.role || localStorage.getItem("role")) === "admin" ? (
+            <Link to="/new-project">
+              <div className={styles.button}>
+                <p>nouveau projet</p>
+              </div>
+            </Link>
+          ) : (
+            <Link to="/project-validation">
+              <div className={styles.button}>
+                <p>validation des projets</p>
+              </div>
+            </Link>
+          )}
           <Link to="/profile">
             <img
               className={styles.profilePicture}

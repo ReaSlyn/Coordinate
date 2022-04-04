@@ -13,23 +13,24 @@ if (isset($data['email'], $data['password'])){
     $firstname = stripslashes($data['firstName']);
     $lastname = strtoupper(stripslashes($data['lastName']));
     try {
-        $sql = "INSERT INTO `user` (`email`, `password`, `firstname`, `lastname`) VALUES (:email, :password, :firstname, :lastname);";
+        $sql = "INSERT INTO `user` (`email`, `password`, `firstname`, `lastname`, `role`) VALUES (:email, :password, :firstname, :lastname, :role);";
         $query = $db->prepare($sql);
         $query->bindValue(':email', $email, PDO::PARAM_STR);
         $query->bindValue(':password', $password, PDO::PARAM_STR);
         $query->bindValue(':firstname', $firstname, PDO::PARAM_STR);
         $query->bindValue(':lastname', $lastname, PDO::PARAM_STR);
+        $query->bindValue(':role', 'student', PDO::PARAM_STR);
         $res = $query->execute();
+        $userId = $db->lastInsertId();
+
         echo json_encode([
-            "email" => $data["email"],
-            "logged" => true,
+            "loggedId" => $userId,
         ]);
     } catch (PDOException $e) {
         echo json_encode([
-            "email" => "",
-            "logged" => false,
+            "loggedId" => null,
         ]);
-    } 
+    }
 
 }
 

@@ -9,45 +9,90 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Layout from "./components/Layout/Layout";
 import Feed from "./components/Feed/Feed";
+import NewProject from "./components/NewProject/NewProject";
+import MonthlyFeed from "./components/Feed/MonthlyFeed";
 import FilteredFeed from "./components/Feed/FilteredFeed";
+import ProjectValidation from "./components/ProjectValidation/ProjectValidation";
+import Profile from "./components/Profil/Profile";
 
 function App() {
-  const [logged, setLogged] = useState(false);
-  const [email, setToken] = useState("");
+  const [loggedId, setLoggedId] = useState(null);
+  const [role, setRole] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [email, setEmail] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
+
+  console.log(localStorage);
 
   return (
     <BrowserRouter>
       <Layout
-        logged={logged}
+        loggedId={loggedId}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         filter={filter}
         setFilter={setFilter}
+        role={role}
       >
         <Routes>
-          {!logged && !localStorage.getItem("logged") ? (
+          {!localStorage.getItem("loggedId") ? (
             <>
               <Route
-                path="/login"
-                element={<Login setLogged={setLogged} setToken={setToken} />}
+                path="login"
+                element={
+                  <Login
+                    setLoggedId={setLoggedId}
+                    setRole={setRole}
+                    setFirstName={setFirstName}
+                    setLastName={setLastName}
+                    setEmail={setEmail}
+                    email={email}
+                  />
+                }
               />
               <Route
-                path="/register"
-                element={<Register setLogged={setLogged} setToken={setToken} />}
+                path="register"
+                element={
+                  <Register
+                    setLoggedId={setLoggedId}
+                    setRole={setRole}
+                    setFirstName={setFirstName}
+                    setLastName={setLastName}
+                    firstName={firstName}
+                    lastName={lastName}
+                    setEmail={setEmail}
+                    email={email}
+                  />
+                }
               />
               <Route path="*" element={<Navigate to="/login" replace />} />
             </>
           ) : (
             <>
-              <Route path="/" element={<Feed />} />
               <Route
-                path="/feed"
+                path="/new-project"
+                element={<NewProject />}
+              />
+              <Route
+                path="/project-validation"
+                element={<ProjectValidation />}
+              />
+              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="monthly"
                 element={
-                  <FilteredFeed searchTerm={searchTerm} filter={filter} />
+                  <MonthlyFeed searchTerm={searchTerm} filter={filter} />
                 }
               />
+              <Route
+                path="monthly/:urlFilter"
+                element={
+                  <MonthlyFeed searchTerm={searchTerm} filter={filter} />
+                }
+              />
+              <Route path="feed" element={<Feed />} />
               <Route
                 path="feed/:urlFilter"
                 element={
@@ -55,25 +100,25 @@ function App() {
                 }
               />
               <Route
-                path="feed/design/:urlFilter"
+                path="feed/design/:urlSearchTerm"
                 element={
                   <FilteredFeed searchTerm={searchTerm} filter={filter} />
                 }
               />
               <Route
-                path="feed/development/:urlFilter"
+                path="feed/development/:urlSearchTerm"
                 element={
                   <FilteredFeed searchTerm={searchTerm} filter={filter} />
                 }
               />
               <Route
-                path="feed/project-manager/:urlFilter"
+                path="feed/project-manager/:urlSearchTerm"
                 element={
                   <FilteredFeed searchTerm={searchTerm} filter={filter} />
                 }
               />
 
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<Navigate to="feed" replace />} />
             </>
           )}
         </Routes>

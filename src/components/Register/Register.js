@@ -7,11 +7,17 @@ import hetic from "../../images/hetic.svg";
 import logo from "../../images/logo.svg";
 
 function Register(props) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setLogged, setToken} = props;
+  const {
+    setLoggedId,
+    setRole,
+    setFirstName,
+    setLastName,
+    firstName,
+    lastName,
+    email,
+    setEmail,
+  } = props;
   let navigate = useNavigate();
 
   let handleSubmit = async (e) => {
@@ -27,11 +33,17 @@ function Register(props) {
     });
 
     let resJson = await res.json();
-    if (resJson.logged) {
-      localStorage.setItem("logged", resJson.logged);
-      localStorage.setItem("email", resJson.email);
-      setLogged(resJson.passwordCheck);
-      setToken(resJson.email);
+    console.log(resJson);
+
+    if (resJson.loggedId) {
+      localStorage.setItem("loggedId", resJson.loggedId);
+      localStorage.setItem("role", resJson.role);
+      localStorage.setItem("firstName", firstName);
+      localStorage.setItem("lastName", lastName);
+      localStorage.setItem("email", email);
+      setLoggedId(resJson.loggedId);
+      setRole(resJson.role);
+      navigate("/", {replace: true});
     } else {
       alert("Le mail est déjà utilisé");
     }
@@ -52,11 +64,14 @@ function Register(props) {
       });
 
       let resJson = await res.json();
-      if (resJson.logged) {
-        localStorage.setItem("logged", resJson.logged);
-        localStorage.setItem("email", resJson.email);
-        setLogged(resJson.passwordCheck);
-        setToken(resJson.email);
+      if (resJson.loggedId) {
+        localStorage.setItem("loggedId", resJson.loggedId);
+        localStorage.setItem("role", resJson.role);
+        localStorage.setItem("firstName", firstName);
+        localStorage.setItem("lastName", lastName);
+        localStorage.setItem("email", email);
+        setLoggedId(resJson.loggedId);
+        setRole(resJson.role);
         navigate("/", {replace: true});
       } else {
         alert("Le mail est déjà utilisé");

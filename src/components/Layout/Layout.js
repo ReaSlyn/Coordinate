@@ -6,7 +6,7 @@ import Footer from "./Footer";
 function Layout(props) {
   return (
     <>
-      {props.logged || localStorage.getItem("logged") ? (
+      {localStorage.getItem("loggedId") ? (
         <>
           <Navbar />
           <SearchBar

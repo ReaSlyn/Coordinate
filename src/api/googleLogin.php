@@ -10,7 +10,6 @@ session_start();
 
 if (isset($data['email'])){
     $email = stripslashes($data['email']);
-    $password = stripslashes($data['password']);
     $sql = "SELECT * FROM `user` WHERE `email`=:email";
     $query = $db->prepare($sql);
     $query->bindValue(':email', $email, PDO::PARAM_STR);
@@ -20,22 +19,34 @@ if (isset($data['email'])){
     $rows = $query->rowCount();
     if($rows){
         $emailCheck = true;
-
-        if(password_verify($password, $res['password'])){
-        $passwordCheck = true;
+        $loggedId = $res['id'];
+        $role = $res['role'];
+        $email = $res['email'];
+        $firstName = $res['firstname'];
+        $lastName = $res['lastname'];
         } else {   
-            $passwordCheck = false;
+            $loggedId = null;
+            $role = null;
+            $email = null;
+            $firstName = null;
+            $lastName = null;
         }
+    } else {
+        $loggedId = null;
+        $role = null;
+        $email = null;
+        $firstName = null;
+        $lastName = null;
+        $emailCheck = false;
+};
 
-    }else{
-      $emailCheck = false;
-      $passwordCheck = false;
-    }
-}
 require('close.php');
 
 echo json_encode([
+    "loggedId" => $loggedId,
+    "role" => $role,
     "email" => $email,
+    "firstName" => $firstName,
+    "lastName" => $lastName,
     "emailCheck" => $emailCheck,
-    "passwordCheck" => $passwordCheck
 ]);

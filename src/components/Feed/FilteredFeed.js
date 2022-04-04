@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {useParams} from "react-router-dom";
 import styles from "./FilteredFeed.module.css";
 import view from "../../images/view.svg";
@@ -6,8 +6,7 @@ import like from "../../images/like.svg";
 import JSONDATA from "./MOCK_DATA.json";
 
 function FilteredFeed(props) {
-  const {searchTerm, filter} = props;
-  const {urlFilter} = useParams();
+  const {urlSearchTerm, urlFilter} = useParams();
 
   return (
     <section className={styles.feed}>
@@ -16,9 +15,18 @@ function FilteredFeed(props) {
         <div className={styles.projects}>
           {JSONDATA.slice(4, JSONDATA.length)
             .filter((val) => {
-              if (!searchTerm) {
+              if (
+                !urlSearchTerm &&
+                (!urlFilter ||
+                  ["design", "development", "project-manager"].includes(
+                    urlFilter
+                  ))
+              ) {
                 return val;
-              } else if (val.title.toLowerCase().includes(searchTerm)) {
+              } else if (
+                val.title.toLowerCase().includes(urlSearchTerm) ||
+                val.title.toLowerCase().includes(urlFilter)
+              ) {
                 return val;
               }
             })

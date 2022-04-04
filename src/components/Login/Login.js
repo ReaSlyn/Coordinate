@@ -7,9 +7,8 @@ import hetic from "../../images/hetic.svg";
 import logo from "../../images/logo.svg";
 
 function Login(props) {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setLogged, setToken} = props;
+  const {setLoggedId, setRole, email, setEmail} = props;
   let navigate = useNavigate();
 
   let handleSubmit = async (e) => {
@@ -23,29 +22,50 @@ function Login(props) {
     });
 
     let resJson = await res.json();
+    console.log(resJson);
 
     if (!resJson.emailCheck) {
       alert("Mail incorrect");
-    } else if (!resJson.passwordCheck) {
+    } else if (!resJson.loggedId) {
       alert("Mot de passe incorrect");
       setPassword("");
     }
-    if (resJson.passwordCheck) {
-      localStorage.setItem("logged", resJson.passwordCheck);
+    if (resJson.loggedId) {
+      localStorage.setItem("loggedId", resJson.loggedId);
+      localStorage.setItem("role", resJson.role);
+      localStorage.setItem("firstName", resJson.firstName);
+      localStorage.setItem("lastName", resJson.lastName);
       localStorage.setItem("email", resJson.email);
-      setLogged(resJson.passwordCheck);
-      setToken(resJson.email);
-      navigate("/");
+      setLoggedId(resJson.loggedId);
+      setRole(resJson.role);
+      navigate("/", {replace: true});
     }
   };
 
-  function handleLogin(googleUser) {
+  async function handleLogin(googleUser) {
     let profile = googleUser.getBasicProfile();
-    localStorage.setItem("logged", profile.getId());
-    localStorage.setItem("email", profile.getEmail());
-    setLogged(profile.getId());
-    setToken(profile.getEmail());
-    navigate("/", {replace: true});
+
+    let res = await fetch(`${process.env.REACT_APP_URL}/googleLogin.php`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: profile.getEmail(),
+      }),
+    });
+
+    let resJson = await res.json();
+
+    if (resJson.emailCheck) {
+      localStorage.setItem("loggedId", resJson.loggedId);
+      localStorage.setItem("role", resJson.role);
+      localStorage.setItem("firstName", resJson.firstName);
+      localStorage.setItem("lastName", resJson.lastName);
+      localStorage.setItem("email", resJson.email);
+      setLoggedId(resJson.loggedId);
+      setRole(resJson.role);
+      navigate("/", {replace: true});
+    } else {
+      alert("Vous n'êtes pas inscrit pas ce mai hetic.net");
+    }
   }
 
   function handleFailure() {
