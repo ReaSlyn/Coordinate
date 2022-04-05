@@ -16,7 +16,7 @@ Modify MAMP path to
 Cooordinate/public/api/
 ```
 
-and launch the MAMP server, then, connect to the database in localhost with SSH KEY :
+and launch the MAMP server, then, connect to the database in localhost with SSH KEY via a tunnel
 ```
 ssh h2fullstack debian@185.189.158.68 -L 3306:127.0.0.1:3306 -N
 ```
