@@ -49,3 +49,14 @@
   padding: 8px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 750px) {
+  .form {
+    flex-direction: column;
+    row-gap: 16px;
+  }
+
+  .form input[type="text"] {
+    border-radius: 25px;
+  }
+}

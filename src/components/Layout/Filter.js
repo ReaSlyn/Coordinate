@@ -36,10 +36,10 @@ function Filter(props) {
         </div>
       </NavLink>
       <NavLink
-        to={`${props.path ? props.path : ""}/project-manager/${
+        to={`${props.path ? props.path : ""}/management/${
           searchTerm ? searchTerm : ""
         }`}
-        onClick={() => setFilter(`project-manager`)}
+        onClick={() => setFilter(`management`)}
       >
         <div className={styles.button}>
           <p>chef de projet</p>

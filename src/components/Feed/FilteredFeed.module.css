@@ -40,8 +40,10 @@
   row-gap: 12px;
 }
 
-.project img {
+.project img,
+.project video {
   aspect-ratio: 1.78 / 1;
+  cursor: pointer;
 }
 
 .projectInfo {
@@ -93,6 +95,18 @@
 
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
   grid-gap: 20px;
+}
+
+@media screen and (max-width: 1015px) {
+  .projects {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .projects {
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+  }
 }

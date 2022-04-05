@@ -28,11 +28,7 @@ function SearchBar(props) {
             type="text"
             placeholder="chercher un projet"
             value={searchTerm}
-            onChange={(e) =>
-              setSearchTerm(
-                e.target.value.toLowerCase().replace(/[^a-zA-Z ]/g, "")
-              )
-            }
+            onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
           />
           <img
             className={styles.search}

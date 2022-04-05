@@ -7,6 +7,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 require('connect.php');
 
+/* Inscrit l'utilisateur si l'adresse email n'existe pas encore dans la base de donnée */
 if (isset($data['email'], $data['password'])){
     $email = stripslashes($data['email']);
     $password = password_hash(stripslashes($data['password']), PASSWORD_DEFAULT);
@@ -34,4 +35,4 @@ if (isset($data['email'], $data['password'])){
 
 }
 
-require_once('close.php');
+require('close.php');

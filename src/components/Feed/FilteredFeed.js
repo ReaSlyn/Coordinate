@@ -1,39 +1,66 @@
-import React from "react";
-import {useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import {Helmet} from "react-helmet";
 import styles from "./FilteredFeed.module.css";
 import view from "../../images/view.svg";
 import like from "../../images/like.svg";
-import JSONDATA from "./MOCK_DATA.json";
 
 function FilteredFeed(props) {
-  const {urlSearchTerm, urlFilter} = useParams();
+  const {urlSearchTerm} = useParams();
+  const [projects, setProjects] = useState([]);
+  const {filter} = props;
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    let fetchProjects = async () => {
+      let res = await fetch(
+        `${process.env.REACT_APP_URL}/fetchProjectsFeed.php`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            filter: filter,
+            searchTerm: urlSearchTerm,
+          }),
+        }
+      );
+
+      let resJson = await res.json();
+      setProjects(resJson.projects);
+    };
+
+    fetchProjects();
+  }, [urlSearchTerm, filter]);
 
   return (
-    <section className={styles.feed}>
-      <div>
-        <h1 className={styles.title}>Tout les projets {}</h1>
-        <div className={styles.projects}>
-          {JSONDATA.slice(4, JSONDATA.length)
-            .filter((val) => {
-              if (
-                !urlSearchTerm &&
-                (!urlFilter ||
-                  ["design", "development", "project-manager"].includes(
-                    urlFilter
-                  ))
-              ) {
-                return val;
-              } else if (
-                val.title.toLowerCase().includes(urlSearchTerm) ||
-                val.title.toLowerCase().includes(urlFilter)
-              ) {
-                return val;
-              }
-            })
-            .map((val, key) => {
+    <>
+      <Helmet>
+        <title>Coordinate | Flux de projets</title>
+      </Helmet>
+      <section className={styles.feed}>
+        <div>
+          <h1 className={styles.title}>Tout les projets {}</h1>
+          <div className={styles.projects}>
+            {projects.map((val, key) => {
               return (
                 <div key={key} className={styles.project}>
-                  <img src={val.url} alt={val.title} />
+                  {val.type.includes("image") ? (
+                    <img
+                      src={val.url}
+                      alt={val.title}
+                      onClick={() =>
+                        navigate(`/project/${val.project_id}`, {replace: true})
+                      }
+                    />
+                  ) : (
+                    <video
+                      src={val.url}
+                      width="100%"
+                      height="100%"
+                      onClick={() =>
+                        navigate(`/project/${val.project_id}`, {replace: true})
+                      }
+                    />
+                  )}
                   <div className={styles.projectInfo}>
                     <div className={styles.spaceBetween}>
                       <p>{val.title}</p>
@@ -55,9 +82,10 @@ function FilteredFeed(props) {
                 </div>
               );
             })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

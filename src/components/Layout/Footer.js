@@ -7,13 +7,20 @@ function Footer() {
     <footer className={styles.footer}>
       <div className={styles.flexRow}>
         <div className={styles.pages}>
-          <Link to="/contact">contact</Link>
+          <Link
+            to="/contact"
+            onClick={(e) => {
+              window.location.href = "mailto:contact@coordinate.fr";
+              e.preventDefault();
+            }}
+          >
+            contact
+          </Link>
           <Link to="/legal-mention">mention légales</Link>
-          <Link to="/cookies">cookies</Link>
-          <Link to="/personal-data">données personnelles</Link>
+          <Link to="/team">l'équipe</Link>
         </div>
         <div className={styles.logo}>
-          <Link to="/">
+          <Link to="/feed">
             <svg
               id="a"
               xmlns="http://www.w3.org/2000/svg"

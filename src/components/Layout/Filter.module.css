@@ -16,3 +16,9 @@
   font-size: 14px;
   font-family: var(--medium);
 }
+
+@media screen and (max-width: 750px) {
+  .filter {
+    justify-content: center;
+  }
+}

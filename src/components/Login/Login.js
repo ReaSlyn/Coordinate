@@ -22,7 +22,6 @@ function Login(props) {
     });
 
     let resJson = await res.json();
-    console.log(resJson);
 
     if (!resJson.emailCheck) {
       alert("Mail incorrect");
@@ -33,9 +32,6 @@ function Login(props) {
     if (resJson.loggedId) {
       localStorage.setItem("loggedId", resJson.loggedId);
       localStorage.setItem("role", resJson.role);
-      localStorage.setItem("firstName", resJson.firstName);
-      localStorage.setItem("lastName", resJson.lastName);
-      localStorage.setItem("email", resJson.email);
       setLoggedId(resJson.loggedId);
       setRole(resJson.role);
       navigate("/", {replace: true});
@@ -57,9 +53,6 @@ function Login(props) {
     if (resJson.emailCheck) {
       localStorage.setItem("loggedId", resJson.loggedId);
       localStorage.setItem("role", resJson.role);
-      localStorage.setItem("firstName", resJson.firstName);
-      localStorage.setItem("lastName", resJson.lastName);
-      localStorage.setItem("email", resJson.email);
       setLoggedId(resJson.loggedId);
       setRole(resJson.role);
       navigate("/", {replace: true});

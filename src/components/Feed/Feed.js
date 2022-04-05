@@ -1,26 +1,78 @@
-import React, {useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {Helmet} from "react-helmet";
 import styles from "./Feed.module.css";
 import view from "../../images/view.svg";
 import like from "../../images/like.svg";
-import JSONDATA from "./MOCK_DATA.json";
 
-function Feed(props) {
-  const {searchTerm, filter} = props;
+function Feed() {
+  const [projects, setProjects] = useState([]);
+  const [monthlyProjects, setMonthlyProjects] = useState([]);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    let fetchMonthlyProjects = async () => {
+      let res = await fetch(
+        `${process.env.REACT_APP_URL}/fetchMonthlyProjectsFeed.php`,
+        {
+          method: "POST",
+        }
+      );
+
+      let resJson = await res.json();
+      setMonthlyProjects(resJson.projects);
+    };
+
+    let fetchProjects = async () => {
+      let res = await fetch(
+        `${process.env.REACT_APP_URL}/fetchProjectsFeed.php`,
+        {
+          method: "POST",
+        }
+      );
+
+      let resJson = await res.json();
+      setProjects(resJson.projects);
+    };
+
+    fetchMonthlyProjects();
+    fetchProjects();
+  }, []);
+
   return (
-    <section className={styles.feed}>
-      <div>
-        <div className={styles.row}>
-          <h2 className={styles.title}>Projet du mois</h2>
-          <Link to="/monthly" className={styles.link}>
-            voir tout
-          </Link>
-        </div>
-        <div className={styles.projects}>
-          {JSONDATA.slice(0, 4).map((val, key) => {
-            return (
+    <>
+      <Helmet>
+        <title>Coordinate | Flux de projets</title>
+      </Helmet>
+      <section className={styles.feed}>
+        <div>
+          <div className={styles.row}>
+            <h2 className={styles.title}>Projet du mois</h2>
+            <Link to="/monthly" className={styles.link}>
+              voir tout
+            </Link>
+          </div>
+          <div className={styles.projects}>
+            {monthlyProjects.map((val, key) => (
               <div key={key} className={styles.project}>
-                <img src={val.url} alt={val.title} />
+                {val.type.includes("image") ? (
+                  <img
+                    src={val.url}
+                    alt={val.title}
+                    onClick={() =>
+                      navigate(`/project/${val.project_id}`, {replace: true})
+                    }
+                  />
+                ) : (
+                  <video
+                    src={val.url}
+                    width="100%"
+                    height="100%"
+                    onClick={() =>
+                      navigate(`/project/${val.project_id}`, {replace: true})
+                    }
+                  />
+                )}
                 <div className={styles.projectInfo}>
                   <div className={styles.spaceBetween}>
                     <p>{val.title}</p>
@@ -40,17 +92,32 @@ function Feed(props) {
                   </p>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
-      <div>
-        <h1 className={styles.title}>Tout les projets</h1>
-        <div className={styles.projects}>
-          {JSONDATA.slice(4, JSONDATA.length).map((val, key) => {
-            return (
+        <div>
+          <h1 className={styles.title}>Tous les projets</h1>
+          <div className={styles.projects}>
+            {projects.map((val, key) => (
               <div key={key} className={styles.project}>
-                <img src={val.url} alt={val.title} />
+                {val.type.includes("image") ? (
+                  <img
+                    src={val.url}
+                    alt={val.title}
+                    onClick={() =>
+                      navigate(`/project/${val.project_id}`, {replace: true})
+                    }
+                  />
+                ) : (
+                  <video
+                    src={val.url}
+                    width="100%"
+                    height="100%"
+                    onClick={() =>
+                      navigate(`/project/${val.project_id}`, {replace: true})
+                    }
+                  />
+                )}
                 <div className={styles.projectInfo}>
                   <div className={styles.spaceBetween}>
                     <p>{val.title}</p>
@@ -70,11 +137,11 @@ function Feed(props) {
                   </p>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

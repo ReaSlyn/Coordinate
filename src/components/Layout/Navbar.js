@@ -22,19 +22,18 @@ function Navbar(props) {
           </Link>
         </li>
         <li className={styles.right}>
+          <Link to="/new-project">
+            <div className={styles.button}>
+              <p>nouveau projet</p>
+            </div>
+          </Link>
           {(props.role || localStorage.getItem("role")) === "admin" ? (
-            <Link to="/new-project">
-              <div className={styles.button}>
-                <p>nouveau projet</p>
-              </div>
-            </Link>
-          ) : (
             <Link to="/project-validation">
               <div className={styles.button}>
                 <p>validation des projets</p>
               </div>
             </Link>
-          )}
+          ) : null}
           <Link to="/profile">
             <img
               className={styles.profilePicture}

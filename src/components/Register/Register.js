@@ -33,14 +33,10 @@ function Register(props) {
     });
 
     let resJson = await res.json();
-    console.log(resJson);
 
     if (resJson.loggedId) {
       localStorage.setItem("loggedId", resJson.loggedId);
       localStorage.setItem("role", resJson.role);
-      localStorage.setItem("firstName", firstName);
-      localStorage.setItem("lastName", lastName);
-      localStorage.setItem("email", email);
       setLoggedId(resJson.loggedId);
       setRole(resJson.role);
       navigate("/", {replace: true});
@@ -67,9 +63,6 @@ function Register(props) {
       if (resJson.loggedId) {
         localStorage.setItem("loggedId", resJson.loggedId);
         localStorage.setItem("role", resJson.role);
-        localStorage.setItem("firstName", firstName);
-        localStorage.setItem("lastName", lastName);
-        localStorage.setItem("email", email);
         setLoggedId(resJson.loggedId);
         setRole(resJson.role);
         navigate("/", {replace: true});
@@ -88,7 +81,7 @@ function Register(props) {
   return (
     <>
       <Helmet>
-        <title>Coordinate | Connexion</title>
+        <title>Coordinate | Inscription</title>
       </Helmet>
       <div className={styles.background}>
         <div className={styles.card}>
