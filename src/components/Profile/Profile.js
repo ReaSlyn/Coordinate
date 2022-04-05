@@ -68,6 +68,12 @@ function Profile(props) {
                   setLoggedId(null);
                   navigate("/");
                 }}
+                onClick={() => {
+                  localStorage.removeItem("loggedId");
+                  localStorage.removeItem("role");
+                  setLoggedId(null);
+                  navigate("/");
+                }}
                 buttonText="Déconnexion"
               ></GoogleLogout>
             </div>
