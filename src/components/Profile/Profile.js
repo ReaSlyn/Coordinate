@@ -60,22 +60,26 @@ function Profile(props) {
                   </div>
                 ) : null}
               </div>
-              <GoogleLogout
-                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                onLogoutSuccess={() => {
-                  localStorage.removeItem("loggedId");
-                  localStorage.removeItem("role");
-                  setLoggedId(null);
-                  navigate("/");
-                }}
+              <div
+                className={styles.button}
                 onClick={() => {
                   localStorage.removeItem("loggedId");
                   localStorage.removeItem("role");
                   setLoggedId(null);
                   navigate("/");
                 }}
-                buttonText="Déconnexion"
-              ></GoogleLogout>
+              >
+                <GoogleLogout
+                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                  onLogoutSuccess={() => {
+                    localStorage.removeItem("loggedId");
+                    localStorage.removeItem("role");
+                    setLoggedId(null);
+                    navigate("/");
+                  }}
+                  buttonText="Déconnexion"
+                ></GoogleLogout>
+              </div>
             </div>
           </div>
           <div className={styles.projects}>
