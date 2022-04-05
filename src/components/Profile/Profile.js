@@ -27,7 +27,7 @@ function Profile(props) {
       );
 
       let resJson = await res.json();
-      setUser(resJson.projects[0]);
+      setUser(resJson.user[0]);
       setProjects(resJson.projects);
     };
 
@@ -66,7 +66,7 @@ function Profile(props) {
                   localStorage.removeItem("loggedId");
                   localStorage.removeItem("role");
                   setLoggedId(null);
-                  navigate("/login", {replace: true});
+                  navigate("/");
                 }}
                 buttonText="Déconnexion"
               ></GoogleLogout>

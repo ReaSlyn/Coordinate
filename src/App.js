@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import "./App.css";
 import "./fonts/NeueHaasDisplayThin.ttf";
@@ -19,13 +19,16 @@ import Project from "./components/Project/Project";
 
 function App() {
   const [loggedId, setLoggedId] = useState(null);
-  const [disconnected, setDisconnected] = useState(false);
   const [role, setRole] = useState(null);
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [email, setEmail] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("loggedId")) {
+      setLoggedId(localStorage.getItem("loggedId"));
+      setRole(localStorage.getItem("role"));
+    }
+  });
 
   return (
     <BrowserRouter>
@@ -38,34 +41,16 @@ function App() {
         role={role}
       >
         <Routes>
-          {!localStorage.getItem("loggedId") || disconnected ? (
+          {!localStorage.getItem("loggedId") || !loggedId ? (
             <>
               <Route
                 path="login"
-                element={
-                  <Login
-                    setLoggedId={setLoggedId}
-                    setRole={setRole}
-                    setFirstName={setFirstName}
-                    setLastName={setLastName}
-                    setEmail={setEmail}
-                    email={email}
-                  />
-                }
+                element={<Login setLoggedId={setLoggedId} setRole={setRole} />}
               />
               <Route
                 path="register"
                 element={
-                  <Register
-                    setLoggedId={setLoggedId}
-                    setRole={setRole}
-                    setFirstName={setFirstName}
-                    setLastName={setLastName}
-                    firstName={firstName}
-                    lastName={lastName}
-                    setEmail={setEmail}
-                    email={email}
-                  />
+                  <Register setLoggedId={setLoggedId} setRole={setRole} />
                 }
               />
               <Route path="*" element={<Navigate to="/login" replace />} />
@@ -84,7 +69,7 @@ function App() {
                     setLoggedId={setLoggedId}
                     setFilter={setFilter}
                     filter={filter}
-                    setDisconnected={setDisconnected}
+                    loggedId={loggedId}
                   />
                 }
               />
@@ -95,7 +80,7 @@ function App() {
                     setLoggedId={setLoggedId}
                     setFilter={setFilter}
                     filter={filter}
-                    setDisconnected={setDisconnected}
+                    loggedId={loggedId}
                   />
                 }
               />
@@ -106,7 +91,7 @@ function App() {
                     setLoggedId={setLoggedId}
                     setFilter={setFilter}
                     filter={filter}
-                    setDisconnected={setDisconnected}
+                    loggedId={loggedId}
                   />
                 }
               />
@@ -117,7 +102,7 @@ function App() {
                     setLoggedId={setLoggedId}
                     setFilter={setFilter}
                     filter={filter}
-                    setDisconnected={setDisconnected}
+                    loggedId={loggedId}
                   />
                 }
               />

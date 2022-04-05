@@ -8,7 +8,8 @@ import logo from "../../images/logo.svg";
 
 function Login(props) {
   const [password, setPassword] = useState("");
-  const {setLoggedId, setRole, email, setEmail} = props;
+  const [email, setEmail] = useState("");
+  const {setLoggedId, setRole} = props;
   let navigate = useNavigate();
 
   let handleSubmit = async (e) => {
@@ -22,6 +23,7 @@ function Login(props) {
     });
 
     let resJson = await res.json();
+    console.log(resJson);
 
     if (!resJson.emailCheck) {
       alert("Mail incorrect");
@@ -122,6 +124,7 @@ function Login(props) {
               cookiePolicy={"single_host_origin"}
               isSignedIn={true}
               buttonText="Continuer avec Google"
+              disabled
             ></GoogleLogin>
           </div>
         </div>

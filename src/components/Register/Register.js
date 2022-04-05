@@ -8,16 +8,10 @@ import logo from "../../images/logo.svg";
 
 function Register(props) {
   const [password, setPassword] = useState("");
-  const {
-    setLoggedId,
-    setRole,
-    setFirstName,
-    setLastName,
-    firstName,
-    lastName,
-    email,
-    setEmail,
-  } = props;
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const {setLoggedId, setRole} = props;
   let navigate = useNavigate();
 
   let handleSubmit = async (e) => {
@@ -159,6 +153,7 @@ function Register(props) {
               cookiePolicy={"single_host_origin"}
               isSignedIn={true}
               buttonText="Continuer avec Google"
+              disabled
             ></GoogleLogin>
           </div>
         </div>
