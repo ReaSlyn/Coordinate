@@ -59,18 +59,14 @@ function Feed() {
                   <img
                     src={val.url}
                     alt={val.title}
-                    onClick={() =>
-                      navigate(`/project/${val.project_id}`, {replace: true})
-                    }
+                    onClick={() => navigate(`/project/${val.project_id}`)}
                   />
                 ) : (
                   <video
                     src={val.url}
                     width="100%"
                     height="100%"
-                    onClick={() =>
-                      navigate(`/project/${val.project_id}`, {replace: true})
-                    }
+                    onClick={() => navigate(`/project/${val.project_id}`)}
                   />
                 )}
                 <div className={styles.projectInfo}>
@@ -104,18 +100,14 @@ function Feed() {
                   <img
                     src={val.url}
                     alt={val.title}
-                    onClick={() =>
-                      navigate(`/project/${val.project_id}`, {replace: true})
-                    }
+                    onClick={() => navigate(`/project/${val.project_id}`)}
                   />
                 ) : (
                   <video
                     src={val.url}
                     width="100%"
                     height="100%"
-                    onClick={() =>
-                      navigate(`/project/${val.project_id}`, {replace: true})
-                    }
+                    onClick={() => navigate(`/project/${val.project_id}`)}
                   />
                 )}
                 <div className={styles.projectInfo}>
