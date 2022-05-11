@@ -28,3 +28,7 @@ npm start
 ```
 
 Website will be at http://localhost:3000
+
+Admin account to access all the feature :
+  - username ```admin@admin```
+  - password ```admin```
