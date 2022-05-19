@@ -2,7 +2,9 @@
 H2 Full-Stack Project
 
 ## Local
-First, pull the project
+First, go inside MAMP/htdocs
+
+Then pull the project
 ```
 git pull https://github.com/ReaSlyn/Coordinate.git
 ```
